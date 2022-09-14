@@ -5,9 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { ProductComponent } from './components/product/product.component';
 import { StockComponent } from './components/stock/stock.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -16,7 +14,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    ProductComponent,
     StockComponent
   ],
   imports: [

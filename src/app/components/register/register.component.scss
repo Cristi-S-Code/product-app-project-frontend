@@ -4,7 +4,7 @@
     align-content: center;
 }
 
-.user-container {
+.register-container {
     margin-top: 100px;
     width: 40%;
     display: flex;
@@ -14,8 +14,6 @@
     // background-color: 
 }
 
-// .h1 {}
-
 form {
     display: flex;
     flex-direction: column;
@@ -23,22 +21,10 @@ form {
     padding: 14px;
 }
 
-// .form-field {
-//     display: flex;
-//     flex-direction: column;
-//     background-color: blue;
-//     padding: 14px;
-// }
-
 input {
     margin: 10px 0px;
-    // height: 30px;
-    // border: 1px solid var(--pale-blue-green);
-    // border-radius: 4px;
     padding: 10px;
   }
-
-// .fields-container {}
 
 a{
     margin-top: 15px;
@@ -48,4 +34,4 @@ a{
     cursor: pointer;
     text-align: left;
     white-space: nowrap;
-}
+}  

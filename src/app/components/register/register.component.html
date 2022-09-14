@@ -1,0 +1,32 @@
+<div class="register-container">
+    <h1>Create an account</h1>
+    <form [formGroup]="userForm" (ngSubmit)="submitRegisterForm()">
+        <div class="fields-container">
+            <div class="form-field p-float-label">
+                <input type="text" id="user-name" pInputText formControlName="userName" />
+                <label for="user-name">Username</label>
+            </div>
+            <div>
+                <label for="password">Password</label><br>
+                <input type="password" pPassword formControlName="password" />
+            </div>
+            <div>
+                <label for="confirm-password">Confirm password</label><br>
+                <p-password [(ngModel)]="value3" [toggleMask]="true"></p-password>
+                <!-- <input type="confirm-password" pPassword formControlName="confirm-password"/> -->
+            </div>
+            <div class="form-field p-float-label">
+                <input id="email" type="text" pInputText>
+                <label for="email">Email</label>
+            </div>
+            <div class="form-field p-float-label">
+                <input id="creation-date" type="text" pInputText>
+                <label for="creation-date">Creation Date</label>
+            </div>
+        </div>
+    </form>
+    <div class="action-buttons">
+        <button pButton type="button" label="Submit"></button>
+    </div>
+    <a routerLink="/login">Go to login</a>
+</div>

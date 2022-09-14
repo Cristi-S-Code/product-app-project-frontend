@@ -7,7 +7,7 @@
                 <label for="user-name">Username</label>
             </div>
             <div>
-                <input type="password" pPassword />
+                <input type="password" pPassword formControlName="password"/>
                 <!-- <p-password [(ngModel)]="value4">
                     <ng-template pTemplate="header">
                         <h6>Pick a password</h6>
@@ -31,4 +31,5 @@
     <div class="action-buttons">
         <button pButton type="button" label="Submit"></button>    
     </div>
+    <a routerLink="/register">Create an account</a>
 </div>
