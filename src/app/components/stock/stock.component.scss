@@ -1,0 +1,33 @@
+:host {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.stock-container {
+    margin-top: 100px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // background-color: 
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px;
+}
+
+input {
+    margin: 10px 0px;
+    padding: 10px;
+}
+
+.action-buttons {
+    display: grid;
+    justify-content: right;
+
+}

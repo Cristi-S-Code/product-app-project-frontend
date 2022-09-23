@@ -1,2 +1,40 @@
-<p>product works!</p>
-<p-steps [model]="items" ></p-steps>
+<div class="product-container">
+    <p-card>
+    <h1>Add product details:</h1>
+    <form [formGroup]="productForm">
+        <div class="fields-container">
+            <div class="form-field p-float-label">
+                <input type="text" id="pzn" pInputText formControlName="pzn"/>
+                <label for="pzn">Pzn</label>
+            </div>
+            <div class="form-field p-float-label">
+                <input type="text" id="supplier" pInputText formControlName="supplier"/>
+                <label for="supplier">Supplier</label>
+            </div>
+            <div class="form-field p-float-label">
+                <input type="text" id="product-name" pInputText formControlName="productName">
+                <label for="product-name">Product Name</label>
+            </div>
+            <div class="form-field p-float-label">
+                <input type="text" id="strength" pInputText formControlName="strength"/>
+                <label for="strength">Strength</label>
+            </div>
+            <div class="form-field p-float-label">
+                <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity2" [editable]="true" optionLabel="name"></p-dropdown> -->
+                <input type="text" id="package-size" pInputText formControlName="packageSize"/>
+                <label for="package-size">Package Size</label>
+            </div>
+            <div class="form-field p-float-label">
+                <input type="text" id="unit" pInputText formControlName="unit"/>
+                <label for="unit">Unit</label>
+            </div>
+
+        </div>
+    </form>
+    <div class="action-buttons">
+        <!-- <button pButton (onClick)="nextPage()" type="button" label="Next"></button> -->
+        <p-button label="Next" (onClick)="saveProduct()" icon="pi pi-angle-right" iconPos="right" ></p-button>
+    </div>
+    <!-- <a routerLink="/login">Go to login</a> -->
+</p-card>
+</div>

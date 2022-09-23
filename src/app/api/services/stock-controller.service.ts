@@ -8,6 +8,7 @@ import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
 import { Stock } from '../models/stock';
+import { StockDto } from '../models/stock-dto';
 
 /**
  * Stock Controller
@@ -17,10 +18,10 @@ import { Stock } from '../models/stock';
 })
 class StockControllerService extends __BaseService {
   static readonly getAllStockUsingGETPath = '/stock';
-  static readonly addnewStockUsingPOSTPath = '/stock/add';
-  static readonly deleteStockUsingDELETEPath = '/stock/delete/{id}';
-  static readonly editStockUsingGETPath = '/stock/edit/{id}';
-  static readonly addEditedStockToListUsingPUTPath = '/stock/update';
+  static readonly addnewStockUsingPOSTPath = '/stock/add/{pzn}';
+  static readonly deleteStockUsingDELETEPath = '/stock/delete/{pzn}';
+  static readonly editStockUsingGETPath = '/stock/edit/{pzn}';
+  static readonly getAllStockExtraUsingGETPath = '/stock/table';
 
   constructor(
     config: __Configuration,
@@ -66,17 +67,23 @@ class StockControllerService extends __BaseService {
 
   /**
    * addnewStock
-   * @param newStock newStock
+   * @param params The `StockControllerService.AddnewStockUsingPOSTParams` containing the following parameters:
+   *
+   * - `pzn`: pzn
+   *
+   * - `newStock`: newStock
+   *
    * @return OK
    */
-  addnewStockUsingPOSTResponse(newStock: Stock): __Observable<__StrictHttpResponse<Stock>> {
+  addnewStockUsingPOSTResponse(params: StockControllerService.AddnewStockUsingPOSTParams): __Observable<__StrictHttpResponse<StockDto>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    __body = newStock;
+    if (params.pzn != null) __params = __params.set('pzn', params.pzn.toString());
+    __body = params.newStock;
     let req = new HttpRequest<any>(
       'POST',
-      this.rootUrl + `/stock/add`,
+      this.rootUrl + `/stock/add/${encodeURIComponent(String(params.pzn))}`,
       __body,
       {
         headers: __headers,
@@ -87,33 +94,38 @@ class StockControllerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Stock>;
+        return _r as __StrictHttpResponse<StockDto>;
       })
     );
   }
   /**
    * addnewStock
-   * @param newStock newStock
+   * @param params The `StockControllerService.AddnewStockUsingPOSTParams` containing the following parameters:
+   *
+   * - `pzn`: pzn
+   *
+   * - `newStock`: newStock
+   *
    * @return OK
    */
-  addnewStockUsingPOST(newStock: Stock): __Observable<Stock> {
-    return this.addnewStockUsingPOSTResponse(newStock).pipe(
-      __map(_r => _r.body as Stock)
+  addnewStockUsingPOST(params: StockControllerService.AddnewStockUsingPOSTParams): __Observable<StockDto> {
+    return this.addnewStockUsingPOSTResponse(params).pipe(
+      __map(_r => _r.body as StockDto)
     );
   }
 
   /**
    * deleteStock
-   * @param id id
+   * @param pzn pzn
    */
-  deleteStockUsingDELETEResponse(id: number): __Observable<__StrictHttpResponse<null>> {
+  deleteStockUsingDELETEResponse(pzn: string): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'DELETE',
-      this.rootUrl + `/stock/delete/${encodeURIComponent(String(id))}`,
+      this.rootUrl + `/stock/delete/${encodeURIComponent(String(pzn))}`,
       __body,
       {
         headers: __headers,
@@ -130,27 +142,27 @@ class StockControllerService extends __BaseService {
   }
   /**
    * deleteStock
-   * @param id id
+   * @param pzn pzn
    */
-  deleteStockUsingDELETE(id: number): __Observable<null> {
-    return this.deleteStockUsingDELETEResponse(id).pipe(
+  deleteStockUsingDELETE(pzn: string): __Observable<null> {
+    return this.deleteStockUsingDELETEResponse(pzn).pipe(
       __map(_r => _r.body as null)
     );
   }
 
   /**
    * editStock
-   * @param id id
+   * @param pzn pzn
    * @return OK
    */
-  editStockUsingGETResponse(id: number): __Observable<__StrictHttpResponse<Stock>> {
+  editStockUsingGETResponse(pzn: string): __Observable<__StrictHttpResponse<Array<Stock>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
 
     let req = new HttpRequest<any>(
       'GET',
-      this.rootUrl + `/stock/edit/${encodeURIComponent(String(id))}`,
+      this.rootUrl + `/stock/edit/${encodeURIComponent(String(pzn))}`,
       __body,
       {
         headers: __headers,
@@ -161,34 +173,32 @@ class StockControllerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Stock>;
+        return _r as __StrictHttpResponse<Array<Stock>>;
       })
     );
   }
   /**
    * editStock
-   * @param id id
+   * @param pzn pzn
    * @return OK
    */
-  editStockUsingGET(id: number): __Observable<Stock> {
-    return this.editStockUsingGETResponse(id).pipe(
-      __map(_r => _r.body as Stock)
+  editStockUsingGET(pzn: string): __Observable<Array<Stock>> {
+    return this.editStockUsingGETResponse(pzn).pipe(
+      __map(_r => _r.body as Array<Stock>)
     );
   }
 
   /**
-   * addEditedStockToList
-   * @param editedStock editedStock
+   * getAllStockExtra
    * @return OK
    */
-  addEditedStockToListUsingPUTResponse(editedStock: Stock): __Observable<__StrictHttpResponse<Stock>> {
+  getAllStockExtraUsingGETResponse(): __Observable<__StrictHttpResponse<Array<Stock>>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    __body = editedStock;
     let req = new HttpRequest<any>(
-      'PUT',
-      this.rootUrl + `/stock/update`,
+      'GET',
+      this.rootUrl + `/stock/table`,
       __body,
       {
         headers: __headers,
@@ -199,23 +209,38 @@ class StockControllerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<Stock>;
+        return _r as __StrictHttpResponse<Array<Stock>>;
       })
     );
   }
   /**
-   * addEditedStockToList
-   * @param editedStock editedStock
+   * getAllStockExtra
    * @return OK
    */
-  addEditedStockToListUsingPUT(editedStock: Stock): __Observable<Stock> {
-    return this.addEditedStockToListUsingPUTResponse(editedStock).pipe(
-      __map(_r => _r.body as Stock)
+  getAllStockExtraUsingGET(): __Observable<Array<Stock>> {
+    return this.getAllStockExtraUsingGETResponse().pipe(
+      __map(_r => _r.body as Array<Stock>)
     );
   }
 }
 
 module StockControllerService {
+
+  /**
+   * Parameters for addnewStockUsingPOST
+   */
+  export interface AddnewStockUsingPOSTParams {
+
+    /**
+     * pzn
+     */
+    pzn: string;
+
+    /**
+     * newStock
+     */
+    newStock: StockDto;
+  }
 }
 
 export { StockControllerService }

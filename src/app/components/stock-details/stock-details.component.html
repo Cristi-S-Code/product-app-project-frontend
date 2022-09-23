@@ -1,0 +1,5 @@
+<div *ngIf="stockQuantity && stockPrice; else elseBlock">
+<p>Quantity: {{stockQuantity | json}}</p>
+<p>Price: {{stockPrice | json}}</p>
+</div>
+<ng-template #elseBlock>Product out of stock!</ng-template>

@@ -9,6 +9,7 @@ import {PasswordModule} from 'primeng/password';
 import { DividerModule } from "primeng/divider";
 import { BrowserModule } from "@angular/platform-browser";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -17,8 +18,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     RegisterComponent
   ],
   imports: [
-    // BrowserModule,
-    // BrowserAnimationsModule,
     CommonModule,
     RegisterRoutingModule,
     ReactiveFormsModule,
@@ -27,7 +26,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
     ButtonModule,
     PasswordModule,
     DividerModule,
-    
+    HttpClientModule
   ]
 })
 export class RegisterModule { }
