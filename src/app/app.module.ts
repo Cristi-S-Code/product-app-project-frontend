@@ -9,6 +9,13 @@ import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { StockDetailsComponent } from './components/stock-details/stock-details.component';
 import { CommonModule } from '@angular/common';
+import { RegisterComponent } from './components/register/register.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { PasswordModule } from 'primeng/password';
+import { DividerModule } from 'primeng/divider';
+import { UserComponent } from './components/user/user.component';
 
 
 
@@ -17,13 +24,22 @@ import { CommonModule } from '@angular/common';
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    StockDetailsComponent
+    StockDetailsComponent,
+    RegisterComponent,
+    UserComponent,
+    
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    FormsModule,
+    InputTextModule,
+    ButtonModule,
+    PasswordModule,
+    DividerModule,
     
   ],
   exports: [

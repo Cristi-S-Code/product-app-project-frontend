@@ -42,35 +42,11 @@ export class ProductComponent implements OnInit {
   }
 
   saveProduct() {   
-      const newProduct: Product = {
-      pzn: this.selectedProduct?.pzn ?? null,
-      ...this.productForm.getRawValue()};
-    
-    this._createProduct(newProduct);
-    console.log(newProduct.pzn);
-      // if(newProduct){
-      //   this.stepsService.stepsInformation.productInformation = this.productInformation;
-      //   console.log(this.productInformation);
-        
-      //   this._router.navigate(['steps/stock']);
-
-      //       return;
-      // }
-
-      // this.submitted = true;
-    this._router.navigate(['steps/stock', newProduct.pzn]);
-
+    this.stepsService.setProductInformation(this.productForm.getRawValue());
+    this._router.navigate(['steps/stock']);
   }
 
-  private _createProduct(newProduct: Product){
-    this._productService.addNewProductUsingPOST(newProduct).pipe(take(1)).subscribe({
-      next: () => {
-        console.log("This is the new product created ===>", newProduct)
-        // this._router.navigate(['/product'])
-      },
-      error: () => alert('Object was not created. Call your IT responsable!')
-    })
-  }
+
 
   private _createForm() {
     this.productForm = this._formBuilder.group({

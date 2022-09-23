@@ -11,7 +11,7 @@ import { StockComponent } from 'src/app/components/stock/stock.component';
 			{path:'',component: StepsSwitchComponent, children:[
 				{path:'', redirectTo: 'product', pathMatch: 'full'},
 				{path: 'product', component: ProductComponent},
-				{path: 'stock/:id', component: StockComponent}
+				{path: 'stock', component: StockComponent}
 			]}
 		])
 	],

@@ -34,10 +34,10 @@ export class StockComponent implements OnInit {
   }
 
   ngOnInit():void {
-    this._getIdFromLink();
-    this._subscriptionList.push(
-      // this._stockService.editStockUsingGET(this.config.pzn)
-    )
+    // this._getIdFromLink();
+    // this._subscriptionList.push(
+    //   // this._stockService.editStockUsingGET(this.config.pzn)
+    // )
 
   }
 
@@ -45,11 +45,14 @@ export class StockComponent implements OnInit {
   }
 
   saveStock() {
-    const newStock: StockDto = {
-      stockId: this.selectedStock?.stockId ?? null,
-      ...this.stockForm.getRawValue()};
-      this._createStock({newStock: newStock, pzn: this.pznFromLink});
-      this._router.navigate(['table']);
+    // const newStock: StockDto = {
+    //   stockId: this.selectedStock?.stockId ?? null,
+    //   ...this.stockForm.getRawValue()};
+    //   this._createStock({newStock: newStock, pzn: this.pznFromLink});
+    //   this._router.navigate(['table']);
+
+      this.stepsService.setStockInforrmation(this.stockForm.getRawValue());
+      this.stepsService.saveProduct();
 }
 
   prevPage() {

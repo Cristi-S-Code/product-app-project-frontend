@@ -12,7 +12,7 @@ import {AutoCompleteModule} from 'primeng/autocomplete';
 
 @NgModule({
   declarations: [
-    UserComponent
+    // UserComponent
   ],
   imports: [
     CommonModule,

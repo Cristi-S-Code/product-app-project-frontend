@@ -7,8 +7,9 @@
                 <label for="user-name">Username</label>
             </div>
             <div>
-                <label for="password">Password</label><br>
-                <input type="password" pPassword formControlName="password" />
+                <p-password [(ngModel)]="value" formControlName="password"></p-password>
+                <!-- <label for="password">Password</label><br>
+                <input type="password" pPassword formControlName="password" /> -->
             </div>
             <!-- <div>
                 <label for="confirm-password">Confirm password</label><br>

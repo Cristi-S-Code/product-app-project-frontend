@@ -10,7 +10,8 @@ export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   value4!: string;
   value3!: string;
-  
+  value!: string;
+
   constructor(
     private _formBuilder: FormBuilder
   ) {
