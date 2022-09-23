@@ -32,14 +32,14 @@ export class StepsSwitchComponent implements OnInit {
       routerLink: 'stock'
     }
     ];
-    this._getIdFromLink();
+    // this._getIdFromLink();
   }
-  private _getIdFromLink(){
-    const id = this._activatedRoute.snapshot.params['id'];
-    if(id){
-      this.stepsService.getProduct(id);
-    }
-  }
+  // private _getIdFromLink(){
+  //   const id = this._activatedRoute.snapshot.params['id'];
+  //   if(id){
+  //     this.stepsService.getProduct(id);
+  //   }
+  // }
 
 
 }

@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit {
     this._router.navigate(['steps/stock']);
   }
 
-
+  
 
   private _createForm() {
     this.productForm = this._formBuilder.group({

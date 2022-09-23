@@ -6,8 +6,12 @@
                 <input type="text" id="user-name" pInputText formControlName="username" />
                 <label for="user-name">Username</label>
             </div>
+            <div class="form-field p-float-label">
+                <input id="email" type="text" pInputText formControlName="email">
+                <label for="email">Email</label>
+            </div>
             <div>
-                <p-password [(ngModel)]="value" formControlName="password"></p-password>
+                <p-password [toggleMask]="true" formControlName="password"></p-password>
                 <!-- <label for="password">Password</label><br>
                 <input type="password" pPassword formControlName="password" /> -->
             </div>
@@ -15,18 +19,15 @@
                 <label for="confirm-password">Confirm password</label><br>
                 <p-password [(ngModel)]="value3" [toggleMask]="true" formControlName="password"></p-password>
             </div> -->
-            <div class="form-field p-float-label">
-                <input id="email" type="text" pInputText formControlName="email">
-                <label for="email">Email</label>
-            </div>
-            <div class="form-field p-float-label">
+            
+            <!-- <div class="form-field p-float-label">
                 <input id="creation-date" type="text" pInputText formControlName="creationDate">
                 <label for="creation-date">Creation Date</label>
-            </div>
+            </div> -->
         </div>
     </form>
     <div class="action-buttons">
-        <button pButton type="button" label="Submit"></button>
+        <p-button label="Submit" (onClick)="createAccount()"></p-button>
     </div>
     <a routerLink="/login">Go to login</a>
 </div>

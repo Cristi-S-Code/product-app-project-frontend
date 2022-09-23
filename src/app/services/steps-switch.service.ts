@@ -11,14 +11,29 @@ export class StepsSwitchService {
     private _stockService: StockControllerService
   ) { }
 
-  stepsInformation!: {productInformation: Product, stockInformation: Stock };
+//   stepsInformation!: {productInformation: Product, stockInformation: Stock };
+
+  stepsInformation = {
+    productInformation: {
+        packageSize: '',
+        productName: '',
+        pzn: '',
+        strength: '',
+        supplier: '',
+        unit: ''
+    },
+    stockInformation: {
+        price: 0,
+        quantity: 0
+    }
+  }
 
 
 getProductInformation(){
     return this.stepsInformation.productInformation
 }
 
-setProductInformation(productInformation: Product){
+setProductInformation(productInformation: { packageSize: string; productName: string; pzn: string; strength: string; supplier: string; unit: string; }){
     this.stepsInformation.productInformation = productInformation;
 }
 
@@ -46,19 +61,19 @@ saveProduct(){
     })
 }
 
-getProduct(id: string){
-    this._productService.editProductUsingGET(id).subscribe({
-        next: (product) => {
-            this.setProductInformation(product);
-            this._stockService.editStockUsingGET(product.pzn).subscribe({
-                next: (stock) => this.setStockInforrmation(stock[0])
-            })
-        }
+// getProduct(id: string){
+//     this._productService.editProductUsingGET(id).subscribe({
+//         next: (product) => {
+//             this.setProductInformation(product);
+//             this._stockService.editStockUsingGET(product.pzn).subscribe({
+//                 next: (stock) => this.setStockInforrmation(stock[0])
+//             })
+//         }
 
 
 
-    })
+//     })
 
-}
+// }
 
 }
