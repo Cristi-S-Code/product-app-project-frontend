@@ -4,9 +4,8 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StockDetailsComponent } from './components/stock-details/stock-details.component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
@@ -16,17 +15,18 @@ import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { UserComponent } from './components/user/user.component';
-
+import { UserService } from './services/user.service';
+import { interceptorProviders } from './interceptors/interceptors.interceptor';
+import {MenubarModule} from 'primeng/menubar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HeaderComponent,
     StockDetailsComponent,
     RegisterComponent,
-    UserComponent,
+    UserComponent
     
   ],
   imports: [
@@ -40,13 +40,14 @@ import { UserComponent } from './components/user/user.component';
     ButtonModule,
     PasswordModule,
     DividerModule,
+    MenubarModule
     
   ],
   exports: [
     CommonModule,
     ApplicationModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, UserService,interceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

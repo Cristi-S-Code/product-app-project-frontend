@@ -30,22 +30,32 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productInformation = this.stepsService.getProductInformation();
+    // this.productInformation = this.stepsService.getProductInformation();
+    this.stepsService.subject.subscribe({
+      next: () => {
+        this.productForm.patchValue(this.stepsService.getProductInformation());
+      }
+    })
+    this.productForm.patchValue(this.stepsService.getProductInformation());
   }
 
-  submitProductForm() {
-    const newProduct: Product = {
-      pzn: this.selectedProduct?.pzn ?? null,
-      ...this.productForm.getRawValue()};
-    // !! this.selectedProduct ? this.
+  // submitProductForm() {
+  //   const newProduct: Product = {
+  //     pzn: this.selectedProduct?.pzn ?? null,
+  //     ...this.productForm.getRawValue()};
+  //   // !! this.selectedProduct ? this.
     
-  }
+  // }
 
   saveProduct() {   
     this.stepsService.setProductInformation(this.productForm.getRawValue());
     this._router.navigate(['steps/stock']);
   }
 
+  // updateProduct(id: string){
+  //   // this.productForm.patchValue(this.stepsService.getProduct(id)) ;
+
+  // }
   
 
   private _createForm() {

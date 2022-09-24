@@ -14,7 +14,6 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
   styleUrls: ['./stock.component.scss']
 })
 export class StockComponent implements OnInit {
-  private _subscriptionList: Subscription [] = [];
   stockForm!: FormGroup;
   selectedStock?: StockDto;
   value!: String;
@@ -27,8 +26,6 @@ export class StockComponent implements OnInit {
     private _stockService: StockControllerService, 
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    // public ref: DynamicDialogRef, 
-    // public config: DynamicDialogConfig
     ) { 
     this._createForm();
   }
@@ -38,11 +35,9 @@ export class StockComponent implements OnInit {
     // this._subscriptionList.push(
     //   // this._stockService.editStockUsingGET(this.config.pzn)
     // )
-
+    this.stockForm.patchValue(this.stepsService.getStockInformation());
   }
 
-  submitStockForm() {
-  }
 
   saveStock() {
     // const newStock: StockDto = {
@@ -51,11 +46,12 @@ export class StockComponent implements OnInit {
     //   this._createStock({newStock: newStock, pzn: this.pznFromLink});
     //   this._router.navigate(['table']);
 
-      this.stepsService.setStockInforrmation(this.stockForm.getRawValue());
-      this.stepsService.saveProduct();
+      this.stepsService.setStockInformation(this.stockForm.getRawValue());
+      this.stepsService.saveStepsInformation();
 }
 
   prevPage() {
+    this.stepsService.setStockInformation(this.stockForm.getRawValue());
     this._router.navigate(['steps/product']);
 }
 
@@ -68,17 +64,7 @@ private _createStock(newStock: StockControllerService.AddnewStockUsingPOSTParams
     })
 }
 
-private _getIdFromLink(){
-  this._activatedRoute.params.pipe(take(1)).subscribe({
-    next: (params: Params) => {
-      if(!params['id']) {
-        throw Error('There is no pzn for stock')
-      }else{
-      this.pznFromLink = params['id'];
-      }
-    }
-  })
-}
+
 
 private _createForm() {
   this.stockForm = this._formBuilder.group({

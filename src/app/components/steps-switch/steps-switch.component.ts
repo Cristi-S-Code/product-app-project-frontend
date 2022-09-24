@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { MenuItem, MessageService } from 'primeng/api';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 
 
@@ -23,6 +23,7 @@ export class StepsSwitchComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    this._getIdFromLink();
     this.items = [{
       label: 'Product',
       routerLink: 'product'
@@ -32,14 +33,25 @@ export class StepsSwitchComponent implements OnInit {
       routerLink: 'stock'
     }
     ];
-    // this._getIdFromLink();
   }
   // private _getIdFromLink(){
   //   const id = this._activatedRoute.snapshot.params['id'];
   //   if(id){
   //     this.stepsService.getProduct(id);
+  //     this.stepsService.selectedState = true;
   //   }
   // }
-
+  private _getIdFromLink(){
+    this._activatedRoute.firstChild!.params.pipe(take(1)).subscribe({
+      next: (params: Params) => {
+        if(!params['id']) {
+          throw Error('There is no pzn for stock')
+        }else{
+        this.stepsService.getProduct(params['id']);
+        this.stepsService.selectedState = true;
+        }
+      }
+    })
+  }
 
 }

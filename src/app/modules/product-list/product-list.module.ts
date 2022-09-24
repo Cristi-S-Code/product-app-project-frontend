@@ -15,6 +15,8 @@ import { StockModule } from '../stock/stock.module';
 import { StepsSwitchModule } from '../steps-switch/steps-switch.module';
 import { StockSharedModule } from '../stock-shared/stock-shared.module';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import { HomeModule } from '../home/home.module';
+import { HomeRoutingModule } from '../home/home-routing.module';
 
 @NgModule({
   declarations: [
