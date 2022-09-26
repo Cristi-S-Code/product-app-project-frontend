@@ -22,15 +22,15 @@ export class StockComponent implements OnInit {
 
   constructor(
     public stepsService: StepsSwitchService,
-    private _formBuilder: FormBuilder, 
-    private _stockService: StockControllerService, 
+    private _formBuilder: FormBuilder,
+    private _stockService: StockControllerService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    ) { 
+  ) {
     this._createForm();
   }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     // this._getIdFromLink();
     // this._subscriptionList.push(
     //   // this._stockService.editStockUsingGET(this.config.pzn)
@@ -40,36 +40,22 @@ export class StockComponent implements OnInit {
 
 
   saveStock() {
-    // const newStock: StockDto = {
-    //   stockId: this.selectedStock?.stockId ?? null,
-    //   ...this.stockForm.getRawValue()};
-    //   this._createStock({newStock: newStock, pzn: this.pznFromLink});
-    //   this._router.navigate(['table']);
-
+    if (this.stockForm.valid) {
       this.stepsService.setStockInformation(this.stockForm.getRawValue());
       this.stepsService.saveStepsInformation();
-}
+    }
+  }
 
   prevPage() {
     this.stepsService.setStockInformation(this.stockForm.getRawValue());
-    this._router.navigate(['steps/product']);
-}
+    this._router.navigate(['../product'], { relativeTo: this._activatedRoute });
 
-private _createStock(newStock: StockControllerService.AddnewStockUsingPOSTParams){
-  this._stockService.addnewStockUsingPOST(newStock).pipe(take(1)).subscribe({
-    next: () => {
-      console.log("This is the new stock created ===>", newStock)
-    },
-    error: () => alert('Object was not created. Call your IT responsable!')
-    })
-}
+  }
 
-
-
-private _createForm() {
-  this.stockForm = this._formBuilder.group({
-    price: ['', Validators.required],
-    quantity: ['', Validators.required],
-  });
-}
+  private _createForm() {
+    this.stockForm = this._formBuilder.group({
+      price: ['', Validators.required],
+      quantity: ['', Validators.required],
+    });
+  }
 }

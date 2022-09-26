@@ -2,15 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
+import { ConfirmationService, MessageService, PrimeIcons, PrimeNGConfig } from 'primeng/api';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { combineLatest, forkJoin, Subscription, take } from 'rxjs';
 import { Product, Stock } from 'src/app/api/models';
 import { ProductControllerService, StockControllerService } from 'src/app/api/services';
-import { ProductComponent } from '../product/product.component';
 import { StockDetailsComponent } from '../stock-details/stock-details.component';
-import { StockComponent } from '../stock/stock.component';
-import {MenuItem} from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 
 
 
@@ -18,10 +16,10 @@ import {MenuItem} from 'primeng/api';
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-  providers: [DialogService, MessageService]
+  providers: [DialogService, ConfirmationService]
 })
 export class ProductListComponent implements OnInit {
-  productList: Product[]= [];
+  productList: Product[] = [];
   stockList: Stock[] = [];
   subscriptionList: Subscription[] = [];
   productTotal = this._productService.getAllProductsUsingGETResponse();
@@ -29,167 +27,115 @@ export class ProductListComponent implements OnInit {
   displayPosition!: boolean;
   position!: string;
   displayModal!: boolean;
-  selectedStock:Stock [] = [];
+
   stockForm!: FormGroup;
   stockDetails: any;
   ref!: DynamicDialogRef;
   items!: MenuItem[];
-  // pzn!: Product;
+
   product: Product[] = [];
   stock: Stock[] = [];
 
 
   constructor(
-    private _productService: ProductControllerService, 
+    private _productService: ProductControllerService,
     private _stockService: StockControllerService,
-    private _primengConfig: PrimeNGConfig,
-    private _activatedRoute: ActivatedRoute,
-    private _formBuilder: FormBuilder,
     public dialogService: DialogService,
-    public messageService: MessageService,
-    private _router: Router
-    ) {
-      this._createForm();
-     }
-    
+    private _router: Router,
+    private _confirmationService: ConfirmationService,
+    private _messageService: MessageService
+  ) {
+  }
+
 
   ngOnInit(): void {
     this.items = [
       {
         label: 'Edit',
-        icon:'pi pi-fw pi-pencil',
-        // routerLink:['product/', this.items.product.pzn],
-        // command: ((product: Product) => this.sendPznToLink(product)),
-        // command: (product) => {
-        //   routerLink: ['product/', product.pzn];
-        // }
-        // command(product: Product) {
-        //   this._stockService.  `product/${product.pzn}`  
-        // },
-        command(event?) {
-            
-        },
-      }, 
+        icon: 'pi pi-fw pi-pencil',
+      },
       {
         label: 'Delete',
-        icon:'pi pi-fw pi-trash'
-      }]  
+        icon: 'pi pi-fw pi-trash'
+      }]
 
-    this._primengConfig.ripple = true;
     this.subscriptionList.push(
       this._productService.getAllProductsUsingGET().subscribe({
-        next: (list: Product[]) =>{
+        next: (list: Product[]) => {
           console.log('get all product request is working'),
-          this.productList = list;
+            this.productList = list;
         },
-        error:() => console.log('the subscription for product was unsuccessful')
+        error: () => console.log('the subscription for product was unsuccessful')
       }),
-      this._stockService.getAllStockUsingGET().subscribe({
-        next: (list: Stock[]) =>{
-          console.log('get all stock request is working'),
-          this.stockList = list;
-        },
-        error:() => console.log('the subscription for stock was unsuccessful')
-      })
     );
-    this._getIdFromLink();
-    // this.stockDetails = this._getIdFromLink();
-    console.log('is working ----->>>' + this._getIdFromLink());
-    
+
   }
 
-  sendPznToLink(product: Product){
+  sendPznToLink(product: Product) {
     this._router.navigate([`product/${product.pzn}`])
   }
 
   ngOnDestroy(): void {
     // Every subscription needs to be unsubscribed to avoid memory leaks!
-   this.subscriptionList.forEach((sub) => sub.unsubscribe())
-    // if (this.ref) {
-    //     this.ref.close();
-    
-    // }
- }
+    this.subscriptionList.forEach((sub) => sub.unsubscribe())
+  }
 
- show(product: Product) {
-  this.ref = this.dialogService.open(StockDetailsComponent , {
+  show(product: Product) {
+    this.ref = this.dialogService.open(StockDetailsComponent, {
       width: '40%',
       data: {
         pzn: product.pzn
       }
-  });
+    });
 
-  // this.ref.onClose.subscribe((product: Product) =>{
-  //   if (product) {
-  //       this.messageService.add({severity:'info', summary: 'Product Selected', detail: product.pzn});
-  //   }
-// });
-}
- 
- showValues(product: Product) {
+  }
 
- }
-
-//  showPositionDialog(position: string) {
-//   this.position = position;
-//   this.displayPosition = true;
-// }
-
-showModalDialog() {
-  // this.stockDetails = this._getIdFromLink();
-  this.displayModal = true;
-  
-}
-
-deleteValues(product: Product){
+  deleteValues(product: Product) {
     this._stockService.deleteStockUsingDELETE(product.pzn).pipe(take(1)).subscribe({
-    next: () => this._router.navigate(['/table']).then(() => {
-      window.location.reload();
-      })
+      next: () => {
+        const index = this.productList.findIndex((p => p.pzn === product.pzn));
+        this._messageService.add({
+          severity: 'success',
+          summary: 'Product deleted',
+          detail: product.productName + ' was succesfuly deleted',
+          life: 3000,
+        });
+        if (index !== -1) {
+          this.productList.splice(index, 1);
+        }
+
+      }
     })
-}
+    // this._confirmationService.confirm({
+    //   message:
+    //     'Are you sure you want to delete ' + product.productName + '?',
+    //   acceptLabel: 'Yes',
+    //   acceptIcon: PrimeIcons.CHECK,
+    //   rejectLabel: 'No',
+    //   rejectIcon: PrimeIcons.TIMES,
+    //   header: 'Delete',
+    //   accept: () => {
+    //     this._stockService.deleteStockUsingDELETE(product.pzn).pipe(take(1)).subscribe({
+    //       next: () => {
+    //         const index = this.productList.findIndex((p => p.pzn === product.pzn));
+    //         if (index !== -1) {
+    //           this.productList.splice(index, 1);
+    //         }
+    //         this._messageService.add({
+    //           severity: 'success',
+    //           summary: 'Product deleted',
+    //           detail: product.productName + ' was succesfuly deleted',
+    //           life: 3000,
+    //         });
+    //       }
+    //     })
+    //   }
+    // })
+  }
 
-onEdit(param: string){
-  this._router.navigate(['/steps', param])
-}
-
-private _getStockById(pzn: string){
-  this._stockService.editStockUsingGET(pzn).pipe(
-    take(1)
-  ).subscribe({
-    next: (stock: Stock[]) => {
-      this.stockForm.patchValue(stock);
-      this.selectedStock = stock;
-      console.log('selectedstok works====>>' + this.selectedStock);
-    }
-  })
-}
-
-private _getIdFromLink(){
-  this._activatedRoute.params.pipe(take(1)).subscribe({
-    next: (params: Params) => {
-      if(!params['pzn']) throw Error('There is no id for stock')
-      this._getStockById(params['pzn']);
-    },
-    error: () => alert("get id from link is not working")
-  })
-}
-
-// private _addStockToTable(pzn: string){
-//   this._stockService.editStockUsingGET(pzn).subscribe({
-//     next: (stock: Stock) => {
-//       this.stockForm.patchValue(stock);
-//       this.selectedStock = stock;
-//     }
-//   })
-// }
-
-private _createForm() {
-  this.stockForm = this._formBuilder.group({
-    quantity: ['', Validators.required],
-    price: ['', Validators.required]
-  });
-}
+  onEdit(param: string) {
+    this._router.navigate(['/steps', param])
+  }
 
 }
 

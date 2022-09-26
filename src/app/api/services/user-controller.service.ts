@@ -7,7 +7,7 @@ import { StrictHttpResponse as __StrictHttpResponse } from '../strict-http-respo
 import { Observable as __Observable } from 'rxjs';
 import { map as __map, filter as __filter } from 'rxjs/operators';
 
-import { User } from '../models/user';
+import { UserDto } from '../models/user-dto';
 
 /**
  * User Controller
@@ -16,8 +16,9 @@ import { User } from '../models/user';
   providedIn: 'root',
 })
 class UserControllerService extends __BaseService {
+  static readonly getUserUsingGETPath = '/user';
   static readonly registerUserUsingPOSTPath = '/user/register';
-  static readonly updateUserUsingPUTPath = '/user/update/{id}';
+  static readonly updateUserUsingPUTPath = '/user/update';
 
   constructor(
     config: __Configuration,
@@ -27,11 +28,49 @@ class UserControllerService extends __BaseService {
   }
 
   /**
+   * getUser
+   * @param name undefined
+   * @return OK
+   */
+  getUserUsingGETResponse(name?: string): __Observable<__StrictHttpResponse<UserDto>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+    if (name != null) __params = __params.set('name', name.toString());
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/user`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<UserDto>;
+      })
+    );
+  }
+  /**
+   * getUser
+   * @param name undefined
+   * @return OK
+   */
+  getUserUsingGET(name?: string): __Observable<UserDto> {
+    return this.getUserUsingGETResponse(name).pipe(
+      __map(_r => _r.body as UserDto)
+    );
+  }
+
+  /**
    * registerUser
    * @param user user
    * @return OK
    */
-  registerUserUsingPOSTResponse(user: User): __Observable<__StrictHttpResponse<User>> {
+  registerUserUsingPOSTResponse(user: UserDto): __Observable<__StrictHttpResponse<UserDto>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
@@ -49,7 +88,7 @@ class UserControllerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<User>;
+        return _r as __StrictHttpResponse<UserDto>;
       })
     );
   }
@@ -58,31 +97,25 @@ class UserControllerService extends __BaseService {
    * @param user user
    * @return OK
    */
-  registerUserUsingPOST(user: User): __Observable<User> {
+  registerUserUsingPOST(user: UserDto): __Observable<UserDto> {
     return this.registerUserUsingPOSTResponse(user).pipe(
-      __map(_r => _r.body as User)
+      __map(_r => _r.body as UserDto)
     );
   }
 
   /**
    * updateUser
-   * @param params The `UserControllerService.UpdateUserUsingPUTParams` containing the following parameters:
-   *
-   * - `user`: user
-   *
-   * - `id`: id
-   *
+   * @param user user
    * @return OK
    */
-  updateUserUsingPUTResponse(params: UserControllerService.UpdateUserUsingPUTParams): __Observable<__StrictHttpResponse<User>> {
+  updateUserUsingPUTResponse(user: UserDto): __Observable<__StrictHttpResponse<UserDto>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
-    __body = params.user;
-
+    __body = user;
     let req = new HttpRequest<any>(
       'PUT',
-      this.rootUrl + `/user/update/${encodeURIComponent(String(params.id))}`,
+      this.rootUrl + `/user/update`,
       __body,
       {
         headers: __headers,
@@ -93,44 +126,23 @@ class UserControllerService extends __BaseService {
     return this.http.request<any>(req).pipe(
       __filter(_r => _r instanceof HttpResponse),
       __map((_r) => {
-        return _r as __StrictHttpResponse<User>;
+        return _r as __StrictHttpResponse<UserDto>;
       })
     );
   }
   /**
    * updateUser
-   * @param params The `UserControllerService.UpdateUserUsingPUTParams` containing the following parameters:
-   *
-   * - `user`: user
-   *
-   * - `id`: id
-   *
+   * @param user user
    * @return OK
    */
-  updateUserUsingPUT(params: UserControllerService.UpdateUserUsingPUTParams): __Observable<User> {
-    return this.updateUserUsingPUTResponse(params).pipe(
-      __map(_r => _r.body as User)
+  updateUserUsingPUT(user: UserDto): __Observable<UserDto> {
+    return this.updateUserUsingPUTResponse(user).pipe(
+      __map(_r => _r.body as UserDto)
     );
   }
 }
 
 module UserControllerService {
-
-  /**
-   * Parameters for updateUserUsingPUT
-   */
-  export interface UpdateUserUsingPUTParams {
-
-    /**
-     * user
-     */
-    user: User;
-
-    /**
-     * id
-     */
-    id: number;
-  }
 }
 
 export { UserControllerService }

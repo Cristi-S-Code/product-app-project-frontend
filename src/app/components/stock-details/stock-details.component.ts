@@ -18,11 +18,10 @@ export class StockDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._stockService.editStockUsingGET(this._config.data.pzn).subscribe({
+    this._stockService.getStockByPznUsingGET(this._config.data.pzn).subscribe({
       next: (resp) => {
-        console.log(resp)
-        this.stockQuantity = resp[0].quantity
-        this.stockPrice = resp[0].price
+        this.stockQuantity = resp.quantity
+        this.stockPrice = resp.price
         }
       
     })

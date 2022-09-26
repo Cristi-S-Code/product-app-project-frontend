@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { User } from 'src/app/api/models';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -11,42 +9,28 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-userForm!: FormGroup;
-showError = false;
-username: String = '';
-password: String = '';
+  userForm!: FormGroup;
 
-
-constructor(
-  private _formBuilder: FormBuilder,
-  private _userService: UserService,
-  private _router: Router
-) {
-  this._createForm();
- }
-
-ngOnInit(): void {
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _userService: UserService,
+  ) {
+    this._createForm();
   }
-submitLoginForm() {
 
-}
+  ngOnInit(): void {
+  }
 
-login(){
-  console.log('button is working...!!!');
-  this._userService.setUserInformation(this.userForm.getRawValue());
-  this._userService.login();
-  console.log('login is working...!!!');
-}
+  login() {
+    this._userService.login(this.userForm.get('email')?.value, this.userForm.get('password')?.value);
+  }
 
-showLogin(){
-  return !window.location.href.includes('products');
-}
 
-private _createForm() {
-  this.userForm = this._formBuilder.group({
-    email: [''],
-    password: ['']
-  });
-}
+  private _createForm() {
+    this.userForm = this._formBuilder.group({
+      email: [''],
+      password: ['']
+    });
+  }
 
 }

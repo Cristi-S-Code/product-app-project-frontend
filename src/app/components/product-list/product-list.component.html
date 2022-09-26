@@ -1,11 +1,5 @@
-<p-table 
-[value]="productList" 
-styleClass="p-datatable-striped" 
-responsiveLayout="scroll"
-[paginator]="true"
-[rows]="10"
-[scrollable]="true" 
-scrollHeight="600px">
+<p-table [value]="productList" styleClass="p-datatable-striped" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+    [scrollable]="true" scrollHeight="600px">
     <ng-template pTemplate="header">
         <tr>
             <th>Pzn </th>
@@ -32,13 +26,10 @@ scrollHeight="600px">
             <td>
                 <!-- <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
                 <button #btn type="button" pButton icon="pi pi-fw pi-list" label="Show" (click)="menu.toggle($event)"></button> -->
-                <button pButton pRipple type="button" 
-                icon="pi pi-fw pi-pencil" 
-                class="p-button-rounded p-button-text" (click)="onEdit(product.pzn)"></button>
-                <button pButton pRipple 
-                type="button" 
-                icon="pi pi-fw pi-trash" 
-                class="p-button-rounded p-button-danger p-button-text" (click)="deleteValues(product)"></button>    
+                <button pButton pRipple type="button" icon="pi pi-fw pi-pencil" class="p-button-rounded p-button-text"
+                    (click)="onEdit(product.pzn)"></button>
+                <button pButton pRipple type="button" icon="pi pi-fw pi-trash"
+                    class="p-button-rounded p-button-danger p-button-text" (click)="deleteValues(product)"></button>
             </td>
         </tr>
     </ng-template>

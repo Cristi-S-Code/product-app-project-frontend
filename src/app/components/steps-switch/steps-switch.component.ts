@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { MenuItem, MessageService } from 'primeng/api';
+import { MenuItem } from 'primeng/api';
 import { Subscription, take } from 'rxjs';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 
@@ -9,7 +9,6 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
   selector: 'app-steps-switch',
   templateUrl: './steps-switch.component.html',
   styleUrls: ['./steps-switch.component.scss'],
-  providers: [MessageService]
 })
 export class StepsSwitchComponent implements OnInit {
   items!: MenuItem[];
@@ -17,10 +16,9 @@ export class StepsSwitchComponent implements OnInit {
 
 
   constructor(
-    public stepsService: StepsSwitchService, 
-    public messageService: MessageService,
-    private _activatedRoute: ActivatedRoute 
-    ) { }
+    public stepsService: StepsSwitchService,
+    private _activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit() {
     this._getIdFromLink();
@@ -41,14 +39,14 @@ export class StepsSwitchComponent implements OnInit {
   //     this.stepsService.selectedState = true;
   //   }
   // }
-  private _getIdFromLink(){
-    this._activatedRoute.firstChild!.params.pipe(take(1)).subscribe({
+  private _getIdFromLink() {
+    this._activatedRoute.params.pipe(take(1)).subscribe({
       next: (params: Params) => {
-        if(!params['id']) {
+        if (!params['id']) {
           throw Error('There is no pzn for stock')
-        }else{
-        this.stepsService.getProduct(params['id']);
-        this.stepsService.selectedState = true;
+        } else {
+          this.stepsService.getProduct(params['id']);
+          this.stepsService.isEditing = true;
         }
       }
     })

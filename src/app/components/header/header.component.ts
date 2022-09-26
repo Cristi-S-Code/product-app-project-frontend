@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ import { MenuItem } from 'primeng/api';
 export class HeaderComponent implements OnInit {
   items!: MenuItem[];
   
-  constructor() { }
+  constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
     this.items = [
@@ -31,11 +32,13 @@ export class HeaderComponent implements OnInit {
       },
       {
         label: 'User',
-        icon: 'pi pi-user'
+        icon: 'pi pi-user',
+        routerLink: 'user-details',
       },
       {
         label: 'Log out',
-        icon: 'pi pi-sign-out'
+        icon: 'pi pi-sign-out',
+        command: ()=> this._userService.logout()
       }
       
   ];

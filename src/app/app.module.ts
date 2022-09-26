@@ -16,8 +16,12 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { UserComponent } from './components/user/user.component';
 import { UserService } from './services/user.service';
-import { interceptorProviders } from './interceptors/interceptors.interceptor';
+import { interceptorProviders } from './interceptors/interceptors';
 import {MenubarModule} from 'primeng/menubar';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
+import { ToastModule } from 'primeng/toast';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -26,7 +30,8 @@ import {MenubarModule} from 'primeng/menubar';
     HeaderComponent,
     StockDetailsComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    UserDetailsComponent
     
   ],
   imports: [
@@ -40,14 +45,15 @@ import {MenubarModule} from 'primeng/menubar';
     ButtonModule,
     PasswordModule,
     DividerModule,
-    MenubarModule
-    
+    MenubarModule,
+    ToastModule, 
+    ConfirmDialogModule
   ],
   exports: [
     CommonModule,
     ApplicationModule
   ],
-  providers: [DatePipe, UserService,interceptorProviders],
+  providers: [DatePipe,interceptorProviders, MessageService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

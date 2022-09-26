@@ -20,9 +20,9 @@ class StockControllerService extends __BaseService {
   static readonly getAllStockUsingGETPath = '/stock';
   static readonly addnewStockUsingPOSTPath = '/stock/add/{pzn}';
   static readonly deleteStockUsingDELETEPath = '/stock/delete/{pzn}';
-  static readonly editStockUsingGETPath = '/stock/edit/{pzn}';
   static readonly getAllStockExtraUsingGETPath = '/stock/table';
   static readonly addEditedStockToListUsingPUTPath = '/stock/update/{pzn}';
+  static readonly getStockByPznUsingGETPath = '/stock/{pzn}';
 
   constructor(
     config: __Configuration,
@@ -152,44 +152,6 @@ class StockControllerService extends __BaseService {
   }
 
   /**
-   * editStock
-   * @param pzn pzn
-   * @return OK
-   */
-  editStockUsingGETResponse(pzn: string): __Observable<__StrictHttpResponse<Array<Stock>>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/stock/edit/${encodeURIComponent(String(pzn))}`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<Array<Stock>>;
-      })
-    );
-  }
-  /**
-   * editStock
-   * @param pzn pzn
-   * @return OK
-   */
-  editStockUsingGET(pzn: string): __Observable<Array<Stock>> {
-    return this.editStockUsingGETResponse(pzn).pipe(
-      __map(_r => _r.body as Array<Stock>)
-    );
-  }
-
-  /**
    * getAllStockExtra
    * @return OK
    */
@@ -270,6 +232,44 @@ class StockControllerService extends __BaseService {
   addEditedStockToListUsingPUT(params: StockControllerService.AddEditedStockToListUsingPUTParams): __Observable<StockDto> {
     return this.addEditedStockToListUsingPUTResponse(params).pipe(
       __map(_r => _r.body as StockDto)
+    );
+  }
+
+  /**
+   * getStockByPzn
+   * @param pzn pzn
+   * @return OK
+   */
+  getStockByPznUsingGETResponse(pzn: string): __Observable<__StrictHttpResponse<Stock>> {
+    let __params = this.newParams();
+    let __headers = new HttpHeaders();
+    let __body: any = null;
+
+    let req = new HttpRequest<any>(
+      'GET',
+      this.rootUrl + `/stock/${encodeURIComponent(String(pzn))}`,
+      __body,
+      {
+        headers: __headers,
+        params: __params,
+        responseType: 'json'
+      });
+
+    return this.http.request<any>(req).pipe(
+      __filter(_r => _r instanceof HttpResponse),
+      __map((_r) => {
+        return _r as __StrictHttpResponse<Stock>;
+      })
+    );
+  }
+  /**
+   * getStockByPzn
+   * @param pzn pzn
+   * @return OK
+   */
+  getStockByPznUsingGET(pzn: string): __Observable<Stock> {
+    return this.getStockByPznUsingGETResponse(pzn).pipe(
+      __map(_r => _r.body as Stock)
     );
   }
 }

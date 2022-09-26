@@ -1,6 +1,6 @@
 <div class="register-container">
-    <h1>Create an account</h1>
-    <form [formGroup]="registerForm">
+    <h1>User details</h1>
+    <form [formGroup]="accountForm">
         <div class="fields-container">
             <div class="form-field p-float-label">
                 <input type="text" id="user-name" pInputText formControlName="username" />
@@ -12,12 +12,10 @@
             </div>
             <div>
                 <p-password [toggleMask]="true" formControlName="password"></p-password>
-                <!-- <small class="p-error block" *ngIf="registerForm.controls['password'].hasError('pattern')">Password is invalid</small> -->
             </div>
         </div>
     </form>
     <div class="action-buttons">
-        <p-button label="Submit" (onClick)="createAccount()"></p-button>
+        <p-button label="Submit" (onClick)="updateAccount()"></p-button>
     </div>
-    <a routerLink="/login">Go to login</a>
 </div>

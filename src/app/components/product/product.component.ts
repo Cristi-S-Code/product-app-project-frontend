@@ -13,7 +13,6 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
   styleUrls: ['./product.component.scss']
 })
 export class ProductComponent implements OnInit {
-  private _subscriptionList: Subscription[] = [];
   productForm!: FormGroup;
   selectedProduct?: Product;
   submitted: boolean = false;
@@ -22,21 +21,21 @@ export class ProductComponent implements OnInit {
   constructor(
     public stepsService: StepsSwitchService,
     private _formBuilder: FormBuilder,
-    private _productService: ProductControllerService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute
-    ) {
+  ) {
     this._createForm();
   }
 
   ngOnInit() {
-    // this.productInformation = this.stepsService.getProductInformation();
+    this.productForm.patchValue(this.stepsService.getProductInformation());
+
     this.stepsService.subject.subscribe({
       next: () => {
         this.productForm.patchValue(this.stepsService.getProductInformation());
+        this.productForm.get('pzn')?.disable()
       }
     })
-    this.productForm.patchValue(this.stepsService.getProductInformation());
   }
 
   // submitProductForm() {
@@ -44,19 +43,21 @@ export class ProductComponent implements OnInit {
   //     pzn: this.selectedProduct?.pzn ?? null,
   //     ...this.productForm.getRawValue()};
   //   // !! this.selectedProduct ? this.
-    
+
   // }
 
-  saveProduct() {   
+  saveProduct() {
     this.stepsService.setProductInformation(this.productForm.getRawValue());
-    this._router.navigate(['steps/stock']);
+
+    this._router.navigate(['../stock'], {relativeTo: this._activatedRoute});
+
   }
 
   // updateProduct(id: string){
   //   // this.productForm.patchValue(this.stepsService.getProduct(id)) ;
 
   // }
-  
+
 
   private _createForm() {
     this.productForm = this._formBuilder.group({
