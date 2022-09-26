@@ -5,3 +5,10 @@
 :host ::ng-deep .p-card-body {
     padding: 2rem;
 }
+
+::ng-deep .p-steps .p-steps-item .p-menuitem-link{
+    background-color: inherit;
+    color: white; //nu se aplica...??
+}
+
+

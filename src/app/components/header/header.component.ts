@@ -10,30 +10,35 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent implements OnInit {
   items!: MenuItem[];
   
+
   constructor(private _userService: UserService) { }
 
   ngOnInit(): void {
     this.items = [
-      {
-        label: 'Home',
-        icon: 'pi pi-home',
-        routerLink: 'home'
-      },
+      // {
+      //   label: 'Home',
+      //   icon: 'pi pi-home',
+      //   routerLink: 'home',
+      //   routerLinkActiveOptions: { exact: true }
+      // },
       {
         label: 'Products',
         icon: 'pi pi-list',
-        routerLink: 'table'
+        routerLink: 'table',
+        routerLinkActiveOptions: { exact: true }
         
       },
       {
         label: 'New product',
         icon: 'pi pi-plus',
-        routerLink: 'steps'
+        routerLink: 'steps',
+        routerLinkActiveOptions: { exact: true }
       },
       {
         label: 'User',
         icon: 'pi pi-user',
         routerLink: 'user-details',
+        routerLinkActiveOptions: { exact: true }
       },
       {
         label: 'Log out',

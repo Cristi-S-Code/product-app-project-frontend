@@ -12,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TieredMenuModule} from 'primeng/tieredmenu';
+import {InputTextModule} from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
     TableModule,
     ButtonModule,
     TieredMenuModule,
+    InputTextModule
     // ConfirmDialogModule
   ]
 })

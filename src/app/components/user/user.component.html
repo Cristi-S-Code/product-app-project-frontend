@@ -2,13 +2,13 @@
     <h1>Login</h1>
     <form [formGroup]="userForm">
         <div class="fields-container">
-            <div class="form-field p-float-label">
-                <input id="email" type="email" pInputText formControlName="email">
-                <label for="email">Email</label>
+            <div class="form-field">
+                <input id="email" type="email" placeholder="Email" pInputText formControlName="email">
             </div>
             <div class="form-field">
-                <p-password  [feedback]="false" [inputStyle]="{ width: '100%' }" placeholder="Password" formControlName="password">
-                </p-password>
+                <input type="password" pInputText placeholder="Password" formControlName="password"/>
+                <!-- <p-password  [feedback]="false" [inputStyle]="{ width: '100%' }" placeholder="Password" formControlName="password">
+                </p-password> -->
             </div>
         </div>
     </form>

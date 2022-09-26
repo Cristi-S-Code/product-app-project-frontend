@@ -37,6 +37,12 @@ export class UserService {
       next: (_r) => {
         this.isAuthenticated = true;
         localStorage.setItem('auth','isAuthenticated');
+        this._messageService.add({
+          severity: 'success',
+          life: 3000,
+          summary: 'Login',
+          detail: 'You have successfully logged in'
+      });
         this._router.navigate(['/table']);
       },
       error: () => this.showError = true
@@ -48,7 +54,12 @@ export class UserService {
       next: () => {
         this.isAuthenticated = false;
         localStorage.removeItem('auth');
-
+        this._messageService.add({
+          severity: 'success',
+          life: 3000,
+          summary: 'Logout',
+          detail: 'You have successfully logged out'
+      });
         this._router.navigateByUrl('user')
       }
     })
@@ -57,6 +68,12 @@ export class UserService {
   registerUser(newAccount: UserDto){
     this._userCtrl.registerUserUsingPOST(newAccount).pipe(take(1)).subscribe({
       next: () => {
+        this._messageService.add({
+          severity: 'success',
+          life: 3000,
+          summary: 'Success',
+          detail: 'Account created successfully'
+      });
         this._router.navigate(['user'])
       }
     })
@@ -65,7 +82,12 @@ export class UserService {
   updateUser(newAccount: UserDto){
     this._userCtrl.updateUserUsingPUT(newAccount).pipe(take(1)).subscribe({
       next: () => {
-
+        this._messageService.add({
+          severity: 'success',
+          life: 3000,
+          summary: 'Success',
+          detail: 'Account updated successfully'
+      });
       }
     })
   }

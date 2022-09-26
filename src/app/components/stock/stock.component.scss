@@ -27,7 +27,11 @@ input {
 }
 
 .action-buttons {
-    display: grid;
-    justify-content: right;
+    display: flex;
+    justify-content: space-between;
 
+}
+
+::ng-deep [_nghost-yai-c75] .p-card-body {
+    padding: 2rem;
 }

@@ -1,5 +1,36 @@
-<p-table [value]="productList" styleClass="p-datatable-striped" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-    [scrollable]="true" scrollHeight="600px">
+<!-- <p-table>
+    <ng-template pTemplate="caption">
+        <div class="search-box">
+            <span class="p-input-icon-right ml-auto">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                #textInput
+                type="text"
+                (input)="dt.filterGlobal(textInput.value, 'contains')"
+                placeholder="Search product/supplier"
+              />
+            </span>
+          </div>
+    </ng-template>
+</p-table> -->
+
+<p-table #dt [globalFilterFields]="['supplier', 'productName']" [value]="productList" styleClass="p-datatable-striped" responsiveLayout="scroll" [paginator]="true" [rows]="10"
+    [scrollable]="true" scrollHeight="510px">
+    <ng-template pTemplate="caption">
+        <div class="search-box">
+            <span class="p-input-icon-right ml-auto">
+              <i class="pi pi-search"></i>
+              <input
+                pInputText
+                #textInput
+                type="text"
+                (input)="dt.filterGlobal(textInput.value, 'contains')"
+                placeholder="Search product/supplier"
+              />
+            </span>
+          </div>
+    </ng-template>
     <ng-template pTemplate="header">
         <tr>
             <th>Pzn </th>
@@ -15,8 +46,8 @@
     <ng-template pTemplate="body" let-product>
         <tr>
             <td>{{product.pzn}}</td>
-            <td>{{product.supplier}}</td>
-            <td>{{product.productName}}</td>
+            <td>{{product.supplier | uppercase}}</td>
+            <td>{{product.productName | uppercase}}</td>
             <td>{{product.strength}}</td>
             <td>{{product.packageSize}}</td>
             <td>{{product.unit}}</td>

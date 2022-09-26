@@ -73,7 +73,7 @@ export class StepsSwitchService {
                     next: () => {
                         this._messageService.add({
                             severity: 'success',
-                            life: 2000,
+                            life: 3000,
                             summary: 'Success',
                             detail: 'Product added successfully'
                         });
@@ -102,6 +102,12 @@ export class StepsSwitchService {
                     editedStock: this.stepsInformation.stockInformation
                 }).subscribe({
                     next: () => {
+                        this._messageService.add({
+                            severity: 'success',
+                            life: 3000,
+                            summary: 'Success',
+                            detail: 'Product updated successfully'
+                        });
                         this._router.navigate(['table']);
                     }
                 })

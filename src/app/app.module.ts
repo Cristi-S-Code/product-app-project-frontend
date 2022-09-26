@@ -22,7 +22,9 @@ import { UserDetailsComponent } from './components/user-details/user-details.com
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
+import {CardModule} from 'primeng/card';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,10 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DividerModule,
     MenubarModule,
     ToastModule, 
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    CardModule,
+    MessagesModule,
+    MessageModule
   ],
   exports: [
     CommonModule,

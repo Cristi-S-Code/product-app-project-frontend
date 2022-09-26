@@ -1,20 +1,28 @@
 <div class="register-container">
     <h1>Create an account</h1>
     <form [formGroup]="registerForm">
-        <div class="fields-container">
+        <!-- <div class="fields-container"> -->
             <div class="form-field p-float-label">
                 <input type="text" id="user-name" pInputText formControlName="username" />
                 <label for="user-name">Username</label>
+                <small id="username-help" class="p-invalid">Username is not available.</small>
+                <!-- <span *ngIf="registerForm.controls['username'].hasError('minLength')">Username cannot be empty!</span> -->
+                <!-- <span *ngIf="registerForm.controls['username'].hasError('minLength')">Username must be greater than 5 characters!</span> -->
             </div>
             <div class="form-field p-float-label">
                 <input id="email" type="text" pInputText formControlName="email">
                 <label for="email">Email</label>
             </div>
+            <!-- <span>
+                <label for="float-password">Password</label>
+                <p-password [inputStyle]="{ width: '100%' }" formControlName="password" >   
+                </p-password>
+            </span> -->
             <div>
                 <p-password [toggleMask]="true" formControlName="password"></p-password>
                 <!-- <small class="p-error block" *ngIf="registerForm.controls['password'].hasError('pattern')">Password is invalid</small> -->
             </div>
-        </div>
+        <!-- </div> -->
     </form>
     <div class="action-buttons">
         <p-button label="Submit" (onClick)="createAccount()"></p-button>

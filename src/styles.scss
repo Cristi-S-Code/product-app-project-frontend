@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+// html,
+// body {
+//   height: 100%;
+//   overflow: hidden;
+// }
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+  }
+body {
+  margin: 0;
+  font-family: Poppins, sans-serif;
+  // background-color: rgba(118, 180, 154, 0.692);
+  background-image: url(./assets/images/background2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+.p-table {
+  box-shadow: rgb(0 0 0 / 24%) 0px 4px 20px;
+}

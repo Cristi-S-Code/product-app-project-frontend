@@ -33,9 +33,9 @@ export class RegisterComponent implements OnInit {
       '^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])(?=.{8,20})'
     );
     this.registerForm = this._formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', [Validators.required]],
-      username: [''],
+      email: ['', Validators.required, Validators.email],
+      password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(20),]],
+      username: ['' ,[Validators.required, Validators.minLength(5),Validators.maxLength(50),]],
     });
 
   }
