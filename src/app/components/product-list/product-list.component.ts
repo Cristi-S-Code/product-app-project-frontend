@@ -20,21 +20,9 @@ import { MenuItem } from 'primeng/api';
 })
 export class ProductListComponent implements OnInit {
   productList: Product[] = [];
-  stockList: Stock[] = [];
   subscriptionList: Subscription[] = [];
-  productTotal = this._productService.getAllProductsUsingGETResponse();
-  stockTotal = this._stockService.getAllStockUsingGETResponse();
-  displayPosition!: boolean;
-  position!: string;
-  displayModal!: boolean;
-
-  stockForm!: FormGroup;
-  stockDetails: any;
   ref!: DynamicDialogRef;
   items!: MenuItem[];
-  checkforPzn!: Product;
-  product: Product[] = [];
-  stock: Stock[] = [];
 
   constructor(
     private _productService: ProductControllerService,

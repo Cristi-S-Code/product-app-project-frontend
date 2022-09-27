@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Stock, StockDto } from 'src/app/api/models';
-import { StockControllerService } from 'src/app/api/services/stock-controller.service';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 
 
@@ -14,15 +12,10 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 })
 export class StockComponent implements OnInit {
   stockForm!: FormGroup;
-  selectedStock?: StockDto;
-  value!: String;
-  pznFromLink!: string;
-  currentRoute!: string;
 
   constructor(
     public stepsService: StepsSwitchService,
     private _formBuilder: FormBuilder,
-    private _stockService: StockControllerService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
   ) {

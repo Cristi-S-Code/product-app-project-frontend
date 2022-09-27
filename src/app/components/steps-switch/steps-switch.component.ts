@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MenuItem } from 'primeng/api';
-import { Subscription, take } from 'rxjs';
+import { take } from 'rxjs';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 
 
@@ -12,7 +12,6 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 })
 export class StepsSwitchComponent implements OnInit {
   items!: MenuItem[];
-  subscription!: Subscription;
 
 
   constructor(

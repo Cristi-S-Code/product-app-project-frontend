@@ -12,9 +12,6 @@ import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 })
 export class ProductComponent implements OnInit {
   productForm!: FormGroup;
-  selectedProduct?: Product;
-  submitted: boolean = false;
-  productInformation: any;
 
   constructor(
     public stepsService: StepsSwitchService,
