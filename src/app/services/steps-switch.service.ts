@@ -115,17 +115,6 @@ export class StepsSwitchService {
         })
     }
 
-    // getProduct(id: string) {
-    //     this._productService.editProductUsingGET(id).subscribe({
-    //         next: (product) => {
-    //             this.setProductInformation(product);
-    //             this._stockService.editStockUsingGET(product.pzn).subscribe({
-    //                 next: (stock) => this.setStockInformation(stock[0])
-    //             })
-    //         }
-    //     })
-    // }
-
     getProduct(id: string) {
         this._productService.editProductUsingGET(id).pipe(take(1)).subscribe({
             next: (product) => {

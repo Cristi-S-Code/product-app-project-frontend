@@ -5,34 +5,51 @@
         <div class="fields-container">
             <div class="form-field p-float-label">
                 <input type="text" id="pzn" pInputText formControlName="pzn"/>
-                <label for="pzn">Pzn</label>
+                <label for="pzn">Pzn</label><br>
+                <small class="p-error" *ngIf="productForm.controls['pzn'].invalid && (productForm.controls['pzn'].dirty || productForm.controls['pzn'].touched)">
+                    *Pzn max 8 characters
+                    </small> 
             </div>
             <div class="form-field p-float-label">
                 <input type="text" id="supplier" pInputText formControlName="supplier"/>
-                <label for="supplier">Supplier</label>
+                <label for="supplier">Supplier</label><br>
+                <small class="p-error" *ngIf="productForm.controls['supplier'].invalid && (productForm.controls['supplier'].dirty || productForm.controls['supplier'].touched)">
+                    *Supplier max 100 characters
+                    </small>
             </div>
             <div class="form-field p-float-label">
                 <input type="text" id="product-name" pInputText formControlName="productName">
-                <label for="product-name">Product Name</label>
+                <label for="product-name">Product Name</label><br>
+                <small class="p-error" *ngIf="productForm.controls['productName'].invalid && (productForm.controls['productName'].dirty || productForm.controls['productName'].touched)">
+                    *productName max 100 characters
+                    </small> 
             </div>
             <div class="form-field p-float-label">
                 <input type="text" id="strength" pInputText formControlName="strength"/>
-                <label for="strength">Strength</label>
+                <label for="strength">Strength</label><br>
+                <small class="p-error" *ngIf="productForm.controls['strength'].invalid && (productForm.controls['strength'].dirty || productForm.controls['strength'].touched)">
+                    *strength max 100 characters
+                    </small> 
             </div>
             <div class="form-field p-float-label">
-                <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity2" [editable]="true" optionLabel="name"></p-dropdown> -->
                 <input type="text" id="package-size" pInputText formControlName="packageSize"/>
-                <label for="package-size">Package Size</label>
+                <label for="package-size">Package Size</label><br>
+                <small class="p-error" *ngIf="productForm.controls['packageSize'].invalid && (productForm.controls['packageSize'].dirty || productForm.controls['packageSize'].touched)">
+                    *packageSize max 20 characters
+                    </small> 
             </div>
             <div class="form-field p-float-label">
                 <input type="text" id="unit" pInputText formControlName="unit"/>
-                <label for="unit">Unit</label>
+                <label for="unit">Unit</label><br>
+                <small class="p-error" *ngIf="productForm.controls['unit'].invalid && (productForm.controls['unit'].dirty || productForm.controls['unit'].touched)">
+                    *unit max 2 characters
+                    </small> 
             </div>
 
         </div>
     </form>
     <div class="action-buttons">
-        <p-button label="Next" (onClick)="saveProduct()" icon="pi pi-angle-right" iconPos="right" ></p-button>
+        <p-button label="Next" [disabled]="productForm.invalid" (onClick)="saveProduct()" icon="pi pi-angle-right" iconPos="right" ></p-button>
     </div>
 </p-card>
 </div>

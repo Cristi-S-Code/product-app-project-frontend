@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, NavigationEnd, Params, Router, ParamMap } from '@angular/router';
-import { Subscription, take } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Stock, StockDto } from 'src/app/api/models';
 import { StockControllerService } from 'src/app/api/services/stock-controller.service';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';

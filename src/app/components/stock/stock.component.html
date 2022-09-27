@@ -1,16 +1,21 @@
-<div class="product-container">
+<div class="stock-container">
     <p-card>
     <h1>Add stock details:</h1>
     <form [formGroup]="stockForm">
         <div class="fields-container">
             <div class="form-field p-float-label">
                 <input type="text" id="quantity" pInputText formControlName="quantity"/>
-                <label for="quantity">Quantity</label>
-                <small class="p-error block" *ngIf="(stockForm.get('quantity')?.dirty && stockForm.get('quantity')?.invalid)">Quantity is required</small>
+                <label for="quantity">Quantity</label><br>
+                <small class="p-error" *ngIf="stockForm.controls['quantity'].invalid && (stockForm.controls['quantity'].dirty || stockForm.controls['quantity'].touched)">
+                    *Quantity is required
+                    </small>
             </div>
             <div class="form-field p-float-label">
                 <input type="text" id="price" pInputText formControlName="price"/>
-                <label for="price">Price</label>
+                <label for="price">Price</label><br>
+                <small class="p-error" *ngIf="stockForm.controls['price'].invalid && (stockForm.controls['price'].dirty || stockForm.controls['price'].touched)">
+                    *Price is required
+                    </small>
             </div>
         </div>
     </form>

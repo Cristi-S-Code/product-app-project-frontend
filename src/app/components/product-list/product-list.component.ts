@@ -32,10 +32,9 @@ export class ProductListComponent implements OnInit {
   stockDetails: any;
   ref!: DynamicDialogRef;
   items!: MenuItem[];
-
+  checkforPzn!: Product;
   product: Product[] = [];
   stock: Stock[] = [];
-
 
   constructor(
     private _productService: ProductControllerService,

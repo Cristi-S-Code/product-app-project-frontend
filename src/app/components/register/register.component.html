@@ -5,12 +5,16 @@
         <div class="fields-container">
             <div class="form-field">
                 <input type="text" id="user-name" placeholder="Username" pInputText formControlName="username" />
+                <small class="p-error" *ngIf="registerForm.controls['username'].invalid && (registerForm.controls['username'].dirty || registerForm.controls['username'].touched)">
+                    *Username invalid: <br>
+                     length between 5 and 50 characters
+                    </small>    
             </div>
             <div class="form-field">
                 <input id="email" type="email"  placeholder="Email" pInputText formControlName="email"><br>
                 <small class="p-error"
-                *ngIf="registerForm.controls['email'].hasError('email') || (registerForm.controls['email'].touched && registerForm.controls['email'].invalid)">*Email
-              is required</small>
+                *ngIf="registerForm.controls['email'].hasError('email') || (registerForm.controls['email'].touched && registerForm.controls['email'].invalid)">*Invalid email adress
+            </small>
             </div>
             <div class="pass-field">
                 <!-- <p-password [toggleMask]="true" formControlName="password"></p-password> -->
@@ -26,11 +30,14 @@
                       </ul>
                   </ng-template>
                   </p-password>
+                  <small class="p-error" *ngIf="registerForm.controls['password'].invalid && (registerForm.controls['password'].dirty || registerForm.controls['password'].touched)">
+                    *Invalid password format
+                    </small>  
             </div>
         </div>
     </form>
     <div class="action-buttons">
-        <p-button label="Submit" (onClick)="createAccount()"></p-button>
+        <p-button label="Submit" (onClick)="createAccount()" [disabled]="registerForm.invalid"></p-button>
     </div>
     <a routerLink="/login">Go to login</a>
 </div>

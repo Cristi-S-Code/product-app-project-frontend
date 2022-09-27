@@ -36,3 +36,7 @@ input {
 h1{
     margin-left: 14px;
 }
+
+:host ::ng-deep .p-card-body{
+    width: 283px;
+}

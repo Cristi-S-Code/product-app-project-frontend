@@ -30,12 +30,12 @@ export class RegisterComponent implements OnInit {
 
   private _createForm() {
     const passwordStrong: RegExp = new RegExp(
-      '^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])(?=.{8,20})'
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!#%*?&])[A-Za-z\\d@$#!%.*?&]{8,20}'
     );
     this.registerForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(20),Validators.pattern(passwordStrong)]],
-      username: ['' ,[Validators.required, Validators.minLength(5),Validators.maxLength(50),]],
+      username: ['' ,[Validators.required, Validators.minLength(5),Validators.maxLength(50)]],
     });
 
   }

@@ -20,10 +20,13 @@ export class StockDetailsComponent implements OnInit {
   ngOnInit(): void {
     this._stockService.getStockByPznUsingGET(this._config.data.pzn).subscribe({
       next: (resp) => {
-        this.stockQuantity = resp.quantity
-        this.stockPrice = resp.price
+        if(resp !== null){
+          this.stockQuantity = resp.quantity
+          this.stockPrice = resp.price
+        }else{
+          console.log('Product out of Stock');
         }
-      
+        }
     })
   }
 

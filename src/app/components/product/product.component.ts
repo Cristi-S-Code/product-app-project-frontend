@@ -45,12 +45,12 @@ export class ProductComponent implements OnInit {
 
   private _createForm() {
     this.productForm = this._formBuilder.group({
-      packageSize: [''],
-      productName: [''],
-      pzn: ['', Validators.required],
-      strength: [''],
-      supplier: [''],
-      unit: ['']
+      packageSize: ['', [Validators.required, Validators.maxLength(20)]],
+      productName: ['', [Validators.required, Validators.maxLength(100)]],
+      pzn: ['', [Validators.required, Validators.maxLength(8)]],
+      strength: ['', [Validators.required, Validators.maxLength(100)]],
+      supplier: ['', Validators.maxLength(100)],
+      unit: ['', [Validators.required, Validators.maxLength(2)]]
     });
   }
 }

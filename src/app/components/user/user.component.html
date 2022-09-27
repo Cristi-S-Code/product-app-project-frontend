@@ -9,9 +9,6 @@
         <div class="fields-container">
           <div class="form-field">
             <input id="email" type="email" placeholder="Email" pInputText formControlName="email">
-            <small class="p-error"
-              *ngIf="userForm.controls['email'].hasError('email') || (userForm.controls['email'].touched && userForm.controls['email'].invalid)">*Email
-              is required</small>
           </div>
           <div class="form-field">
             <input type="password" pInputText placeholder="Password" formControlName="password" />

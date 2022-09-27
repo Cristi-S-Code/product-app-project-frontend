@@ -32,10 +32,13 @@ export class UserDetailsComponent implements OnInit {
   }
 
   private _createForm() {
+    const passwordStrong: RegExp = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!#%*?&])[A-Za-z\\d@$#!%.*?&]{8,20}'
+    );
     this.accountForm = this._formBuilder.group({
       email: [''],
-      password: ['', Validators.required],
-      username: [''],
+      password: ['',[Validators.required, Validators.minLength(8),Validators.maxLength(20),Validators.pattern(passwordStrong)]],
+      username: ['', [Validators.required, Validators.minLength(5),Validators.maxLength(50),]],
     });
 
     this.accountForm.get('email')?.disable();
