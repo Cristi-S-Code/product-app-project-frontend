@@ -1,22 +1,5 @@
-<!-- <p-table>
-    <ng-template pTemplate="caption">
-        <div class="search-box">
-            <span class="p-input-icon-right ml-auto">
-              <i class="pi pi-search"></i>
-              <input
-                pInputText
-                #textInput
-                type="text"
-                (input)="dt.filterGlobal(textInput.value, 'contains')"
-                placeholder="Search product/supplier"
-              />
-            </span>
-          </div>
-    </ng-template>
-</p-table> -->
-
-<p-table #dt [globalFilterFields]="['supplier', 'productName']" [value]="productList" styleClass="p-datatable-striped" responsiveLayout="scroll" [paginator]="true" [rows]="10"
-    [scrollable]="true" scrollHeight="510px">
+<p-table #dt [globalFilterFields]="['supplier', 'productName']" [value]="productList" styleClass="p-datatable-striped" responsiveLayout="scroll" [paginator]="true" [rows]="15"
+    [scrollable]="true" scrollHeight="476px">
     <ng-template pTemplate="caption">
         <div class="search-box">
             <span class="p-input-icon-right ml-auto">

@@ -106,31 +106,6 @@ export class ProductListComponent implements OnInit {
 
       }
     })
-    // this._confirmationService.confirm({
-    //   message:
-    //     'Are you sure you want to delete ' + product.productName + '?',
-    //   acceptLabel: 'Yes',
-    //   acceptIcon: PrimeIcons.CHECK,
-    //   rejectLabel: 'No',
-    //   rejectIcon: PrimeIcons.TIMES,
-    //   header: 'Delete',
-    //   accept: () => {
-    //     this._stockService.deleteStockUsingDELETE(product.pzn).pipe(take(1)).subscribe({
-    //       next: () => {
-    //         const index = this.productList.findIndex((p => p.pzn === product.pzn));
-    //         if (index !== -1) {
-    //           this.productList.splice(index, 1);
-    //         }
-    //         this._messageService.add({
-    //           severity: 'success',
-    //           summary: 'Product deleted',
-    //           detail: product.productName + ' was succesfuly deleted',
-    //           life: 3000,
-    //         });
-    //       }
-    //     })
-    //   }
-    // })
   }
 
   onEdit(param: string) {

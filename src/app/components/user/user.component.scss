@@ -1,18 +1,8 @@
 :host {
-    display: flex;
-    justify-content: center;
-    align-content: center;
+    display: grid;
+    justify-items: start;
+    position: absolute;
 }
-
-.user-container {
-    margin-top: 100px;
-    width: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
 
 form {
     display: flex;
@@ -21,27 +11,51 @@ form {
     padding: 14px;
 }
 
-.form-field {
-    width: 100;
-}
-
 input {
-    margin: 10px 0px;
+    margin-top: 20px;
     width: 100%;
-    // height: 30px;
-    // border: 1px solid var(--pale-blue-green);
-    // border-radius: 4px;
     padding: 10px;
   }
-
-// .fields-container {}
-
 a{
-    margin-top: 15px;
-    color: #17212f;
+    display: flex;
+    justify-content: center;
+    color: white;
     font-size: inherit;
     text-decoration: underline;
     cursor: pointer;
     text-align: left;
     white-space: nowrap;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin: 14px;
+}
+
+.action-buttons{
+    display: flex;
+    justify-content: center;
+    margin: 14px;
+}
+
+:host ::ng-deep .p-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+:host ::ng-deep .p-card .p-card-content {
+     padding: unset; 
+}
+
+:host ::ng-deep .p-card {
+    margin-top: 158px;
+    margin-left: 179px;
+}
+
+.card-img{
+    height: 100%;
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
 }

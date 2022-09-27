@@ -29,12 +29,12 @@ export class RegisterComponent implements OnInit {
   }
 
   private _createForm() {
-    const passwordRegExp: RegExp = new RegExp(
+    const passwordStrong: RegExp = new RegExp(
       '^(?=.[a-z])(?=.[A-Z])(?=.*[0-9])(?=.{8,20})'
     );
     this.registerForm = this._formBuilder.group({
-      email: ['', Validators.required, Validators.email],
-      password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(20),]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8),Validators.maxLength(20),Validators.pattern(passwordStrong)]],
       username: ['' ,[Validators.required, Validators.minLength(5),Validators.maxLength(50),]],
     });
 

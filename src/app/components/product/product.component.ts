@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription, take } from 'rxjs';
 import { Product } from 'src/app/api/models';
-import { ProductControllerService } from 'src/app/api/services';
 import { StepsSwitchService } from 'src/app/services/steps-switch.service';
 
 
@@ -38,26 +36,12 @@ export class ProductComponent implements OnInit {
     })
   }
 
-  // submitProductForm() {
-  //   const newProduct: Product = {
-  //     pzn: this.selectedProduct?.pzn ?? null,
-  //     ...this.productForm.getRawValue()};
-  //   // !! this.selectedProduct ? this.
-
-  // }
-
   saveProduct() {
     this.stepsService.setProductInformation(this.productForm.getRawValue());
 
     this._router.navigate(['../stock'], {relativeTo: this._activatedRoute});
 
   }
-
-  // updateProduct(id: string){
-  //   // this.productForm.patchValue(this.stepsService.getProduct(id)) ;
-
-  // }
-
 
   private _createForm() {
     this.productForm = this._formBuilder.group({

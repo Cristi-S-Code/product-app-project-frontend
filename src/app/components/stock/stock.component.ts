@@ -31,10 +31,6 @@ export class StockComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this._getIdFromLink();
-    // this._subscriptionList.push(
-    //   // this._stockService.editStockUsingGET(this.config.pzn)
-    // )
     this.stockForm.patchValue(this.stepsService.getStockInformation());
   }
 

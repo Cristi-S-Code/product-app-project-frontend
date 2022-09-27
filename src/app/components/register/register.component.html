@@ -1,31 +1,37 @@
+<p-card>
 <div class="register-container">
-    <h1>Create an account</h1>
+    <h1>Create account</h1>
     <form [formGroup]="registerForm">
-        <!-- <div class="fields-container"> -->
-            <div class="form-field p-float-label">
-                <input type="text" id="user-name" pInputText formControlName="username" />
-                <label for="user-name">Username</label>
-                <small id="username-help" class="p-invalid">Username is not available.</small>
-                <!-- <span *ngIf="registerForm.controls['username'].hasError('minLength')">Username cannot be empty!</span> -->
-                <!-- <span *ngIf="registerForm.controls['username'].hasError('minLength')">Username must be greater than 5 characters!</span> -->
+        <div class="fields-container">
+            <div class="form-field">
+                <input type="text" id="user-name" placeholder="Username" pInputText formControlName="username" />
             </div>
-            <div class="form-field p-float-label">
-                <input id="email" type="text" pInputText formControlName="email">
-                <label for="email">Email</label>
+            <div class="form-field">
+                <input id="email" type="email"  placeholder="Email" pInputText formControlName="email"><br>
+                <small class="p-error"
+                *ngIf="registerForm.controls['email'].hasError('email') || (registerForm.controls['email'].touched && registerForm.controls['email'].invalid)">*Email
+              is required</small>
             </div>
-            <!-- <span>
-                <label for="float-password">Password</label>
-                <p-password [inputStyle]="{ width: '100%' }" formControlName="password" >   
-                </p-password>
-            </span> -->
-            <div>
-                <p-password [toggleMask]="true" formControlName="password"></p-password>
-                <!-- <small class="p-error block" *ngIf="registerForm.controls['password'].hasError('pattern')">Password is invalid</small> -->
+            <div class="pass-field">
+                <!-- <p-password [toggleMask]="true" formControlName="password"></p-password> -->
+                <p-password [toggleMask]="true" placeholder="Password" formControlName="password" >
+                    <ng-template pTemplate="footer">
+                      <p class="mt-2">Suggestions</p>
+                      <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                          <li>At least one lowercase</li>
+                          <li>At least one uppercase</li>
+                          <li>At least one numeric</li>
+                          <li>Minimum 8 characters</li>
+                          <li>Minimum 1 special character</li>
+                      </ul>
+                  </ng-template>
+                  </p-password>
             </div>
-        <!-- </div> -->
+        </div>
     </form>
     <div class="action-buttons">
         <p-button label="Submit" (onClick)="createAccount()"></p-button>
     </div>
     <a routerLink="/login">Go to login</a>
 </div>
+</p-card>

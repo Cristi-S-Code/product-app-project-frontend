@@ -3,16 +3,14 @@
     <h1>User details</h1>
     <form [formGroup]="accountForm">
         <div class="fields-container">
-            <div class="form-field p-float-label">
-                <input type="text" id="user-name" pInputText formControlName="username" />
-                <label for="user-name">Username</label>
+            <div class="form-field">
+                <input type="text" id="user-name" placeholder="Username" pInputText formControlName="username" />
             </div>
-            <div class="form-field p-float-label">
+            <div class="form-field">
                 <input id="email" type="text" pInputText formControlName="email">
-                <label for="email">Email</label>
             </div>
             <div>
-                <p-password [toggleMask]="true" formControlName="password"></p-password>
+                <p-password [toggleMask]="true" placeholder="New Password" formControlName="password"></p-password>
             </div>
         </div>
     </form>

@@ -32,18 +32,11 @@ export class StepsSwitchComponent implements OnInit {
     }
     ];
   }
-  // private _getIdFromLink(){
-  //   const id = this._activatedRoute.snapshot.params['id'];
-  //   if(id){
-  //     this.stepsService.getProduct(id);
-  //     this.stepsService.selectedState = true;
-  //   }
-  // }
   private _getIdFromLink() {
     this._activatedRoute.params.pipe(take(1)).subscribe({
       next: (params: Params) => {
         if (!params['id']) {
-          throw Error('There is no pzn for stock')
+          console.log('There is no pzn for stock')
         } else {
           this.stepsService.getProduct(params['id']);
           this.stepsService.isEditing = true;

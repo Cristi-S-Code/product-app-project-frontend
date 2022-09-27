@@ -7,10 +7,8 @@ import {CardModule} from 'primeng/card';
 import { PasswordModule } from "primeng/password";
 import { DividerModule } from "primeng/divider";
 import {TableModule} from 'primeng/table';
-
 import { ButtonModule } from 'primeng/button';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {InputTextModule} from 'primeng/inputtext';
 
@@ -31,7 +29,6 @@ import {InputTextModule} from 'primeng/inputtext';
     ButtonModule,
     TieredMenuModule,
     InputTextModule
-    // ConfirmDialogModule
   ]
 })
 export class ProductListModule { }

@@ -22,10 +22,6 @@ input {
 
 }
 
-// ::ng-deep .p-card-body {
-//     padding: 2rem; 
-// }
-
-::ng-deep .p-card .p-card-content {
+:host ::ng-deep .p-card .p-card-content {
     padding: unset;
 }
