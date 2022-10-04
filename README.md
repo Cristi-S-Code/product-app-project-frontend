@@ -6,6 +6,7 @@ We have 3 types of entities: User, Product and Stock. Based on these the app has
  - Product: CRUD operations on this entity
  - Stock: can pe added/updated for every product.
  - a search bar for products
+ - APIs created using Swagger and tested with Postman
  
   The application is split into multiple views with menu. We also have validations for every form with success/error messages after each endpoint call and the app keeps the user logged in after refreshing page.
   For UI components we used PrimeNG.
