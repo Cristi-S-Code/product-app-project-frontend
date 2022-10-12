@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   items!: MenuItem[];
   
 
-  constructor(private _userService: UserService) { }
+  constructor(private _userService: UserService, private _messageService: MessageService) { }
 
   ngOnInit(): void {
     this.items = [
@@ -37,11 +37,24 @@ export class HeaderComponent implements OnInit {
       {
         label: 'Log out',
         icon: 'pi pi-sign-out',
-        command: ()=> this._userService.logout()
+        command: ()=> this.showConfirm()
       }
       
   ];
 
+  }
+
+  showConfirm() {
+    this._messageService.clear();
+    this._messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure you want to logout?', detail:'Confirm to proceed'});
+}
+
+  onConfirm() {
+    this._userService.logout();
+  }
+
+  onReject() {
+    this._messageService.clear('c');
   }
 
 }

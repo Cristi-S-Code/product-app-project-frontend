@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 import { UserService } from 'src/app/services/user.service';
 
 
@@ -14,6 +15,7 @@ export class UserComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private _userService: UserService,
+    private _messageService: MessageService
   ) {
     this._createForm();
   }

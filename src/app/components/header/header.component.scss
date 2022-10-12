@@ -1,3 +1,37 @@
 ::ng-deep .p-menubar {
     border-radius: unset;
 }
+
+.text-center {
+    display: grid;
+    justify-items: center;
+}
+
+h4 {
+    margin: 21px 0px 14px;
+}
+
+p {
+    margin: 0px 0px 14px;
+}
+
+.action-buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.p-button.p-button-secondary, .p-buttonset.p-button-secondary > .p-button, .p-splitbutton.p-button-secondary > .p-button {
+    // color: #ffffff;
+    // background: #78909C;
+    // border: 1px solid #78909C;
+    width: 180%;
+}
+
+.p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+    // color: #121212;
+    // background: #C5E1A5;
+    // border: 1px solid #C5E1A5;
+    width: 180%;
+}

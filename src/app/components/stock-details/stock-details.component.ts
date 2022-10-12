@@ -18,7 +18,7 @@ export class StockDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._stockService.getStockByPznUsingGET(this._config.data.pzn).subscribe({
+    this._stockService.getStockByPznUsingGET(this._config?.data?.pzn).subscribe({
       next: (resp) => {
         if(resp !== null){
           this.stockQuantity = resp.quantity

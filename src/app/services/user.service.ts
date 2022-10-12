@@ -45,11 +45,21 @@ export class UserService {
       });
         this._router.navigate(['/table']);
       },
-      error: () => this.showError = true
+      error: () => {
+        this.showError = true;
+        this._messageService.add({
+          severity: 'error',
+          life: 4000,
+          summary: 'Login',
+          detail: 'Email or password invalid!'
+      });
+      }
     })
   }
 
   logout(){
+    this._messageService.clear();
+    this._messageService.add({key: 'c', sticky: true, severity:'warn', summary:'Are you sure?', detail:'Confirm to proceed'});
     this._http.get('http://localhost:8080/logout', { responseType: 'text', observe: 'response' }).subscribe({
       next: () => {
         this.isAuthenticated = false;

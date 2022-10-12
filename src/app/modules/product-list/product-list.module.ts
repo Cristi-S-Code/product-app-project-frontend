@@ -11,6 +11,8 @@ import { ButtonModule } from 'primeng/button';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {TieredMenuModule} from 'primeng/tieredmenu';
 import {InputTextModule} from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {InputTextModule} from 'primeng/inputtext';
     TableModule,
     ButtonModule,
     TieredMenuModule,
-    InputTextModule
+    InputTextModule,
+    ToastModule
   ]
 })
 export class ProductListModule { }

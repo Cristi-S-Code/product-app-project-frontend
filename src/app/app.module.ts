@@ -53,6 +53,7 @@ import {MessageModule} from 'primeng/message';
     CardModule,
     MessagesModule,
     MessageModule
+    
   ],
   exports: [
     CommonModule,
